@@ -1,0 +1,6 @@
+microsoft-edge
+Code
+vim-conf/.vim/plugged/
+**/__pycache__/
+pulse
+dconf
