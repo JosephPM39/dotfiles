@@ -13,7 +13,7 @@ layouts = [
         border_normal=background,
         border_focus=textColor,
         border_width=2,
-        margin=10,
+        margin=12,
         single_border_width=0,
         single_margin=0,
     ),

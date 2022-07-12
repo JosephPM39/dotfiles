@@ -10,4 +10,4 @@ xrandr --output DP-4 --mode 2560x1440 --rate 165 --primary --pos 0x768
 xrandr --dpi 16
 
 #=================== MOUSE CONFIG ===================
-xinput set-prop 'Logitech G502 HERO Gaming Mouse' 'libinput Accel Speed' -0.5
+xinput set-prop 'Logitech G502 HERO Gaming Mouse' 'libinput Accel Speed' -0.7

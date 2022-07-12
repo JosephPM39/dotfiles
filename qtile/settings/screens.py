@@ -22,6 +22,7 @@ def detect_screens(qtile):
             ], 32, ), ))
 
 separatorStyles = {
+        "circles": ["", "", 32, -4],
         "arrows": ["", "", 32, -4],
         "flames": ["", "", 25, -2],
         "triangleBottom": ["", "", 20, -2],
@@ -42,37 +43,64 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.CurrentLayoutIcon(background=primary),
-                widget.GroupBox(inactive=background, block_highlight_text_color=textColor, this_current_screen_border=textColor, this_screen_border=background, other_current_screen_border=secondary, other_screen_border=secondary, active=secondary, background=primary, padding_x=4),
-                separator(fg=primary, close=True),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        'launch': ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
+                separator(fg=primary, style="triangleBottom"),
+                widget.CurrentLayoutIcon(background=primary, padding=1, scale=0.8),
+                widget.GroupBox(
+                    inactive=background,
+                    block_highlight_text_color=textColor,
+                    this_current_screen_border=textColor,
+                    this_screen_border=background,
+                    other_current_screen_border=secondary,
+                    other_screen_border=secondary,
+                    active=secondary,
+                    background=primary,
+                    padding_x=4
                 ),
+                separator(fg=primary, close=True),
+                widget.Prompt(foreground=textColor),
+                #widget.WindowName(),
+                #widget.Chord(
+                #    chords_colors={
+                #        'launch': ("#ff0000", "#ffffff"),
+                #    },
+                #    name_transform=lambda name: name.upper(),
+                #),
+                widget.Spacer(),
+                separator(fg=textColor, style="flames"),
+                separator(fg=textColor, bg=background, close=True, style="arrows"),
+                widget.Clock(format='%H:%M %d/%m/%y', foreground=textColor, background=background),
+                separator(fg=textColor, bg=background, style="arrows"),
+                separator(fg=textColor, close=True, style="flames"),
+                widget.Spacer(),
+
                 separator(fg=primary),
-                widget.Net(interface="enp5s0", foreground=textColor, background=primary),
+                widget.Net(interface="enp5s0", format="歷{down} ↓↑ {up}", foreground=textColor, background=primary),
                 separator(fg=secondary, bg=primary),
-                widget.TextBox("CPU:", name="default", foreground=textColor, background=secondary),
-                widget.CPUGraph(background=secondary),
-                widget.TextBox("RAM:", name="ram", foreground=textColor, background=secondary),
-                widget.Memory(measure_mem='G',foreground=textColor, background=secondary),
-                separator(fg=tertiary, bg=secondary),
-                widget.ThermalSensor(foreground=textColor, background=tertiary, foreground_alert=primary),
-                widget.NvidiaSensors(threshold=60, foreground=textColor, background=tertiary, foreground_alert=primary),
-                separator(fg=info, bg=tertiary),
-                #widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                widget.CPU(format=':{freq_current}GHz {load_percent}%', background=secondary),
+                widget.ThermalSensor(foreground=textColor, background=secondary, foreground_alert=primary),
+                widget.Memory(
+                    format=":{MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                    measure_mem='G',
+                    foreground=textColor,
+                    background=secondary
+                ),
+                separator(fg=background, bg=secondary),
+                widget.TextBox("﬙", background=background, foreground=textColor),
+                widget.NvidiaSensors(
+                    threshold=60,
+                    foreground=textColor,
+                    background=background,
+                    foreground_alert=primary
+                ),
+                separator(fg=background, close=True, style="triangleBottom"),
                 widget.Systray(),
                 # widget.Clock(format='%Y-%m-%d %a %I:%M %p', foreground="#ffaa00"),
-                widget.Clock(format='%d/%m/%y %H:%M', foreground=textColor, background=info),
-                widget.QuickExit(foreground=textColor, background=info),
-                # widget.Memory(foreground="#ff0000")
+                                # widget.Memory(foreground="#ff0000")
             ],
             22,
             background="00000000",
+            border_color="00000000",
+            border_width=6,
         ),
     ),
 ]
