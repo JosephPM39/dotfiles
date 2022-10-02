@@ -4,3 +4,7 @@ vim-conf/.vim/plugged/
 **/__pycache__/
 pulse
 dconf
+configstore
+MongoDB Compass
+obs-studio
+ranger/plugins

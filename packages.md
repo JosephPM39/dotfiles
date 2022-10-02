@@ -1,3 +1,10 @@
+docker-compose
+xampp (yay package)
+mongodb-compass (yay package)
+gnome-keyring
+(remove) pipewire-pulse (for install) pulseaudio
+mysql-workbech
+snapd
 htop
 feh
 picom
@@ -21,6 +28,8 @@ docker
 neofetch
 python-pip
 pip install psutil
+pip install ueberzug (manual path adding to .profile file and source with .zshrc)
+python-pygments
 alsa-utils (contains alsamixer)
 flameshot
 pavucontrol
