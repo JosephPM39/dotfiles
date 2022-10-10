@@ -10,10 +10,10 @@ with open(tp) as file:
 
 textColor = TAILWIND_COLORS['gray']['50']
 primary = TAILWIND_COLORS['gray']['500']
-secondary = TAILWIND_COLORS['gray']['500']
+secondary = TAILWIND_COLORS['gray']['600']
 tertiary = TAILWIND_COLORS['gray']['500']
 warning = TAILWIND_COLORS['pumpkin']['500']
 success = TAILWIND_COLORS['chartreuse']['500']
 danger = TAILWIND_COLORS['coral']['500']
 info = TAILWIND_COLORS['blue']['500']
-background = TAILWIND_COLORS['gray']['800']
+background = TAILWIND_COLORS['gray']['900']

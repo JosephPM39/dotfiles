@@ -22,6 +22,9 @@ require('plugins/alpha-nvim')
 --require('plugins/null-ls')
 --require('plugins/nvim-lint')
 require('plugins/ale')
+require('plugins/bufferline-config')
+require('plugins/nvim-transparent')
+require('plugins/nvim-notify')
 
 -- Personal settings
 -- vim.wo.number = true

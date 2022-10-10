@@ -64,10 +64,30 @@ map('t', '<Esc>', '<C-\\><C-n>')                    -- exit
 -- NvimTree
 map('n', '<leader>t', ':NvimTreeToggle<CR>')            -- open/close
 map('n', '<leader>r', ':NvimTreeRefresh<CR>')       -- refresh
-map('n', '<leader>n', ':NvimTreeFindFile<CR>')      -- search file
+map('n', '<leader>f', ':NvimTreeFindFile<CR>')      -- search file
 
 -- Tagbar
 map('n', '<leader>z', ':TagbarToggle<CR>')          -- open/close
 
 --  Hop Settings place this in one of your configuration file(s)
 map('n', '<leader>w', ':HopChar2<CR>')
+
+-- Notify keymaps
+map('n', '<leader>n', ':Notifications<CR>')
+
+-- Bufferline
+
+for i = 9,1,-1
+do
+  map('n', '<leader>'..i, '<Cmd>BufferLineGoToBuffer '..i..'<CR>')
+end
+
+map('n', '<leader>$', '<Cmd>lua require("bufferline").go_to_buffer(-1, true)<CR>')
+map('n', '<leader>0', '<Cmd>lua require("bufferline").go_to_buffer(1, true)<CR>')
+
+ -- for Prev/Next buffer Visibles
+map('n', '<leader>.', ':BufferLineCycleNext<CR>')
+map('n', '<leader>,', ':BufferLineCyclePrev<CR>')
+
+map('n', '<leader>p', ':BufferLinePick<CR>')
+map('n', '<leader>P', ':BufferLinePickClose<CR>')
