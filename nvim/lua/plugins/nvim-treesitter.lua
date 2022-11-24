@@ -16,7 +16,7 @@ nvim_treesitter.setup {
   -- A list of parser names, or "all"
   ensure_installed = {
     'bash', 'c', 'cpp', 'css', 'html', 'javascript', 'json', 'lua', 'python',
-    'rust', 'typescript', 'vim', 'yaml',
+    'rust', 'typescript', 'vim', 'yaml', 'tsx',
   },
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -24,4 +24,14 @@ nvim_treesitter.setup {
     -- `false` will disable the whole extension
     enable = true,
   },
+  indent = {
+    enable = true,
+    disable = {}
+  },
+  autotag = {
+    enable = true,
+  },
 }
+
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }

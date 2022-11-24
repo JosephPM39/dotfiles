@@ -1,4 +1,7 @@
 docker-compose
+docker
+gnome-terminal
+docker-desktop (https://docs.docker.com/desktop/install/archlinux/)
 xampp (yay package)
 mongodb-compass (yay package)
 gnome-keyring
@@ -23,8 +26,8 @@ nvim
   vim-plug
 zip
 unzip
+unrar
 git
-docker
 neofetch
 python-pip
 pip install psutil

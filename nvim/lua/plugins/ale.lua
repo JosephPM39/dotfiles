@@ -3,6 +3,11 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
+\   'typescriptreact': ['eslint'],
+\   'javascriptreact': ['eslint'],
+\   'javascript.jsx': ['eslint'],
+\   'typescript.jsx': ['eslint'],
+\   'html': ['prettier'],
 \}
 ]])
 

@@ -1,5 +1,6 @@
 microsoft-edge
 Code
+Docker\ Desktop
 vim-conf/.vim/plugged/
 **/__pycache__/
 pulse
@@ -8,3 +9,4 @@ configstore
 MongoDB Compass
 obs-studio
 ranger/plugins
+yay

@@ -1,6 +1,6 @@
 from libqtile.lazy import lazy
 from libqtile.config import Key
-from libqtile.utils import guess_terminal
+#from libqtile.utils import guess_terminal
 
 #terminal = "alacritty"
 terminal = "kitty"
@@ -26,6 +26,7 @@ keys = [
         desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
 
+
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(),
@@ -39,11 +40,16 @@ keys = [
 
     #Spawn Programs
     Key([mod], "s", lazy.spawn('flameshot gui')),
+    Key([mod], "r", lazy.spawn('rofi -show drun')),
+    Key([mod], "e", lazy.spawn('microsoft-edge-stable')),
     #Key([mod], "d", lazy.spawn('alacritty')),
     #Key([mod], "d", aumentarBrillo()),
     #Key([mod], "f", disminuirBrillo()),
 
     #Key([mod, "shift"], "t" lazy.spawn('')),
+
+    # For the system
+    # Key([mod, "control", "shift"], "p", lazy.spawn('poweroff')),
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -60,7 +66,7 @@ keys = [
 
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(),
+    Key([mod], "c", lazy.spawncmd(),
         desc="Spawn a command using a prompt widget"),
 ]
 
