@@ -63,7 +63,7 @@ return packer.startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
 
   -- Tag viewer
-  use 'preservim/tagbar'
+  -- use 'preservim/tagbar'
 
   -- Treesitter interface
   use {
@@ -77,7 +77,11 @@ return packer.startup(function(use)
   use { 'rose-pine/neovim', as = 'rose-pine' }
 
   -- LSP
-  use 'neovim/nvim-lspconfig'
+  use {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'neovim/nvim-lspconfig'
+  }
 
   -- Autocomplete
   use {
@@ -90,6 +94,8 @@ return packer.startup(function(use)
       'saadparwaiz1/cmp_luasnip',
     },
   }
+
+  -- use 'mfussenegger/nvim-lint'
 
   -- Statusline
   use {
@@ -124,13 +130,13 @@ return packer.startup(function(use)
 
   -- null-ls linter
 
-  -- use({
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --  config = function()
-  --      require("null-ls").setup()
-  --  end,
-  --  requires = { "nvim-lua/plenary.nvim" },
-  --})
+  use {
+    "jose-elias-alvarez/null-ls.nvim",
+    -- config = function()
+       -- require("null-ls").setup()
+    -- end,
+    requires = { "nvim-lua/plenary.nvim" },
+  }
 
   -- nvim-lint
 
@@ -138,7 +144,7 @@ return packer.startup(function(use)
 
   -- Ale linter
 
-  use 'dense-analysis/ale'
+ -- use 'dense-analysis/ale'
 
   -- Transparent background
 
@@ -152,11 +158,6 @@ return packer.startup(function(use)
   }
 
   use 'rcarriga/nvim-notify'
-
-  use {
-    'styled-components/vim-styled-components',
-    branch = "main"
-  }
 
   use 'editorconfig/editorconfig-vim'
 
