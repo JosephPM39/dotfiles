@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+config=~/.config/hypr/shaders/fluxVariable.glsl
+default_temperature="3000.0"
+max_temperature="40000.0"
+min_temperature="1000.0"
+
+# Execute accordingly
+if [[ "$1" == "--on" ]]; then
+	if [[ -z "$2" ]]; then
+		sed -i "s/temperature\=.*/temperature=${default_temperature};/" "$config"
+	elif (( $(echo "$2 <= $max_temperature" | bc -l) )) && (( $(echo "$2 >= $min_temperature" | bc -l) )); then
+		sed -i "s/temperature\=.*/temperature=$(bc -l <<< "$2 * 1.0");/" "$config"
+	else 
+		echo "Invalid temperature value"
+		exit 1
+	fi
+elif [[ "$1" == "--off" ]]; then
+	sed -i 's/temperature\=.*/temperature=000.0;/' "$config"
+else 
+	echo "Invalid parameter"
+	exit 1
+fi

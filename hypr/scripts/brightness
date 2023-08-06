@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+iDIR="$HOME/.config/hypr/mako/icons"
+
+# Get brightness
+get_backlight() {
+	LIGHT=$(ddcutil --display 2 getvcp 10 | cut -c 67-69 | xargs)
+	echo "${LIGHT}%"
+}
+
+# Get icons
+get_icon() {
+	backlight="$1"
+	current="${backlight%%%}"
+	if [[ ("$current" -ge "0") && ("$current" -le "10") ]]; then
+		echo "󰹐 Brightness is on Level 0"
+	elif [[ ("$current" -ge "10") && ("$current" -le "20") ]]; then
+		echo "󱩎 Brightness is on Level 1"
+	elif [[ ("$current" -ge "20") && ("$current" -le "40") ]]; then
+		echo "󱩐 Brightness is on Level 2"
+	elif [[ ("$current" -ge "40") && ("$current" -le "60") ]]; then
+		echo "󱩒 Brightness is on Level 3"
+	elif [[ ("$current" -ge "60") && ("$current" -le "80") ]]; then
+		echo "󱩔 Brightness is on Level 4"
+	elif [[ ("$current" -ge "80") && ("$current" -le "95") ]]; then
+		echo "󱩖 Brightness is on Level 5"
+	elif [[ ("$current" -ge "95") && ("$current" -le "100") ]]; then
+		echo "󱧡 Brightness is on Max Level"
+	fi
+}
+
+# Notify
+notify_user() {
+	backlight="$(get_backlight)"
+	hyprctl notify 1 5000 "rgb(66B2FF)" "$(get_icon): $backlight"
+	echo "Display(s) changed brightness to: $backlight"
+}
+
+primary_display=2
+secondary_display=1
+default_brightness=10
+
+exec_dd() {
+	ddcutil $@ || modprobe i2c-dev && ddcutil $@
+}
+
+# Increase brightness
+set_backlight() {
+	brightness=$(get_brightness $2)
+	if [[ "$1" == "--all" ]]; then
+		exec_dd --display "$primary_display" setvcp 10 $brightness && ddcutil --display "$secondary_display" setvcp 10 $brightness && notify_user
+	elif [[ "$1" == "--primary" ]]; then
+		exec_dd --display "$primary_display" setvcp 10 $brightness && notify_user
+	elif [[ "$1" == "--secondary" ]]; then
+		exec_dd --display "$secondary_display" setvcp 10 $brightness && notify_user
+	elif [[ "$1" == "--focused" ]]; then
+		focused_display=$(($(hyprctl -j monitors | jq -r '.[] | select(.focused == true) | .id') + 1))
+		exec_dd --display "$focused_display" setvcp 10 $brightness && notify_user
+	else 
+		hyprctl notify 0 5000 "rgb(FFB266)" "Invalid option"
+		echo "Invalid option"
+	fi
+}
+
+get_brightness() {
+	if [[ "$1" == "--default" ]]; then
+		echo "$default_brightness"
+	else 
+		symbol=$(echo "$1" | cut -c 1-1 | xargs)
+		value=$(echo "$1" | cut -c 2-4 | xargs)
+		if [[ "$symbol" == "=" ]]; then 
+			echo "$value"
+		else 
+			echo "${symbol} ${value}"
+		fi
+	fi
+}
+
+# Execute accordingly
+if [[ "$1" == "--get" ]]; then
+	get_backlight
+elif [ "$1" == "--set" ]; then
+	set_backlight $2 $3
+else
+	hyprctl notify 0 5000 "rgb(FFB266)" "Invalid option"
+	echo "Invalid option"	
+fi
